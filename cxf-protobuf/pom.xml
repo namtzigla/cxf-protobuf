@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.googlecode.cxf.protobuf</groupId>
 	<artifactId>cxf-protobuf</artifactId>
-	<name>cxf-protobuf-rt</name>
-	<version>0.1-SNAPSHOT</version>
+	<name>cxf-protobuf</name>
+	<version>0.1</version>
 	<description>Google's Protocol Buffer - Apache CXF Integration</description>
 	<dependencies>
 		<dependency>
