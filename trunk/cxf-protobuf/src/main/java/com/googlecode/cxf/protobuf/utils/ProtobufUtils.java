@@ -21,7 +21,6 @@ package com.googlecode.cxf.protobuf.utils;
 
 import java.io.IOException;
 
-import com.example.tutorial.AddressBookProtos.AddressBook;
 import com.google.protobuf.DescriptorProtos.FileOptions;
 import com.google.protobuf.Descriptors.Descriptor;
 import com.google.protobuf.Descriptors.EnumDescriptor;
@@ -31,6 +30,7 @@ import com.google.protobuf.Descriptors.FileDescriptor;
 import com.google.protobuf.Descriptors.MethodDescriptor;
 import com.google.protobuf.Descriptors.ServiceDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.Type;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.AddressBook;
 
 /**
  * Utilities for converting a protocol buffer service back to .proto

@@ -15,15 +15,15 @@ import org.apache.cxf.interceptor.ServiceInvokerInterceptor;
 import org.apache.cxf.transport.local.LocalTransportFactory;
 import org.junit.Test;
 
-import com.example.tutorial.AddressBookProtos;
-import com.example.tutorial.AddressBookProtos.AddressBook;
-import com.example.tutorial.AddressBookProtos.AddressBookService;
-import com.example.tutorial.AddressBookProtos.AddressBookServiceMessage;
-import com.example.tutorial.AddressBookProtos.AddressBookSize;
-import com.example.tutorial.AddressBookProtos.NamePattern;
-import com.example.tutorial.AddressBookProtos.Person;
 import com.google.protobuf.RpcCallback;
 import com.google.protobuf.RpcController;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.AddressBook;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.AddressBookService;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.AddressBookServiceMessage;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.AddressBookSize;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.NamePattern;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.Person;
 import com.googlecode.cxf.protobuf.client.SimpleRpcChannel;
 import com.googlecode.cxf.protobuf.client.SimpleRpcController;
 import com.googlecode.cxf.protobuf.interceptor.ProtobufMessageInInterceptor;
@@ -47,8 +47,8 @@ public class AddressBookRPCServiceImplTest extends AbstractCXFProtobufTest {
 		}
 
 		/**
-		 * @see com.example.tutorial.AddressBookProtos.SearchService#add(com.google.protobuf.RpcController,
-		 *      com.example.tutorial.AddressBookProtos.Person,
+		 * @see com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.SearchService#add(com.google.protobuf.RpcController,
+		 *      com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.Person,
 		 *      com.google.protobuf.RpcCallback)
 		 */
 		public void addPerson(RpcController controller, Person request,
