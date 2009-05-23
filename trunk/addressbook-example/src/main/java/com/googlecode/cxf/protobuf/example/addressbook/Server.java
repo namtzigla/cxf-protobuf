@@ -1,7 +1,7 @@
 package com.googlecode.cxf.protobuf.example.addressbook;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
@@ -26,7 +26,7 @@ import com.googlecode.cxf.protobuf.binding.ProtobufBindingFactory;
  * 
  * @author Gyorgy Orban
  */
-public class Main {
+public class Server {
 
 	/**
 	 * @param args
@@ -53,14 +53,14 @@ public class Main {
 				.setAddress("http://localhost:8888/AddressBookService");
 		serverFactoryBean
 				.setServiceBean(new AddressBookProtos.AddressBookService() {
-					List<Person> records = new ArrayList<Person>();
+					Map<Integer, Person> records = new ConcurrentHashMap<Integer, Person>();
 
 					public void listPeople(RpcController controller,
 							NamePattern request, RpcCallback<AddressBook> done) {
 						AddressBook.Builder addressbook = AddressBook
 								.newBuilder();
 
-						for (Person person : records) {
+						for (Person person : records.values()) {
 							if (person.getName().indexOf(request.getPattern()) >= 0) {
 								addressbook.addPerson(person);
 							}
@@ -71,7 +71,10 @@ public class Main {
 
 					public void addPerson(RpcController controller,
 							Person request, RpcCallback<AddressBookSize> done) {
-						records.add(request);
+						if (records.containsKey(request.getId())) {
+							System.out.println("Warning: will replace existing person: " + records.get(request.getId()));
+						}
+						records.put(request.getId(), request);
 						done.run(AddressBookSize.newBuilder().setSize(
 								records.size()).build());
 					}
