@@ -12,12 +12,12 @@ import org.apache.cxf.interceptor.ServiceInvokerInterceptor;
 import org.apache.cxf.transport.local.LocalTransportFactory;
 import org.junit.Test;
 
-import com.example.tutorial.AddressBookProtos.AddressBook;
-import com.example.tutorial.AddressBookProtos.AddressBookServiceMessage;
-import com.example.tutorial.AddressBookProtos.AddressBookSize;
-import com.example.tutorial.AddressBookProtos.NamePattern;
-import com.example.tutorial.AddressBookProtos.Person;
 import com.google.protobuf.Message;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.AddressBook;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.AddressBookServiceMessage;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.AddressBookSize;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.NamePattern;
+import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.Person;
 import com.googlecode.cxf.protobuf.interceptor.ProtobufMessageInInterceptor;
 import com.googlecode.cxf.protobuf.interceptor.ProtobufMessageOutInterceptor;
 

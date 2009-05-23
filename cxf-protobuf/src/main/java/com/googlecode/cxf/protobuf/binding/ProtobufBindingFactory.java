@@ -47,9 +47,6 @@ public class ProtobufBindingFactory extends AbstractBindingFactory {
 
 		binding.getOutInterceptors().add(new ProtobufMessageOutInterceptor());
 
-		// binding.getOutFaultInterceptors().add(new XMLFaultOutInterceptor());
-		// binding.getOutFaultInterceptors().add(new StaxOutInterceptor());
-
 		return binding;
 	}
 
