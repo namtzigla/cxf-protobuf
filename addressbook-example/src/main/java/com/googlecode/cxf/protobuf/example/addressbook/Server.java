@@ -3,10 +3,7 @@ package com.googlecode.cxf.protobuf.example.addressbook;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
-import org.apache.cxf.binding.BindingFactoryManager;
-import org.apache.cxf.transports.http.QueryHandlerRegistry;
 
 import com.example.tutorial.AddressBookProtos;
 import com.example.tutorial.AddressBookProtos.AddressBook;
@@ -16,9 +13,8 @@ import com.example.tutorial.AddressBookProtos.NamePattern;
 import com.example.tutorial.AddressBookProtos.Person;
 import com.google.protobuf.RpcCallback;
 import com.google.protobuf.RpcController;
-import com.googlecode.cxf.protobuf.ProtobufQueryHandler;
 import com.googlecode.cxf.protobuf.ProtobufServerFactoryBean;
-import com.googlecode.cxf.protobuf.binding.ProtobufBindingFactory;
+import com.googlecode.cxf.protobuf.utils.CXFUtils;
 
 /**
  * Simple example that publishes Google's addressbook example as a service in
@@ -33,19 +29,7 @@ public class Server {
 	 */
 	public static void main(String[] args) {
 		// register protocol buffer extensions on cxf bus
-		Bus bus = BusFactory.getDefaultBus();
-		ProtobufBindingFactory protobufBindingFactory = new ProtobufBindingFactory();
-		protobufBindingFactory.setBus(bus);
-
-		BindingFactoryManager manager = bus
-				.getExtension(BindingFactoryManager.class);
-		manager.registerBindingFactory(
-				ProtobufBindingFactory.PROTOBUF_BINDING_ID,
-				protobufBindingFactory);
-
-		QueryHandlerRegistry queryHandlerRegistry = bus
-				.getExtension(QueryHandlerRegistry.class);
-		queryHandlerRegistry.registerHandler(new ProtobufQueryHandler());
+		CXFUtils.registerProtobufExtensionsOnBus(BusFactory.getDefaultBus());
 
 		// create addressbook service
 		ProtobufServerFactoryBean serverFactoryBean = new ProtobufServerFactoryBean();
@@ -81,6 +65,9 @@ public class Server {
 				});
 		serverFactoryBean.setMessageClass(AddressBookServiceMessage.class);
 		serverFactoryBean.create();
+		
+		System.out.println("Server is listening at http://localhost:8888/AddressBookService");
+		System.out.println("Try http://localhost:8888/AddressBookService?proto for the description of the service.");
 	}
 
 }
