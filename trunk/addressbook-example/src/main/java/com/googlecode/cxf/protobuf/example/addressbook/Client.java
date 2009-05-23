@@ -1,10 +1,7 @@
 package com.googlecode.cxf.protobuf.example.addressbook;
 
-import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
-import org.apache.cxf.binding.BindingFactoryManager;
 import org.apache.cxf.endpoint.EndpointException;
-import org.apache.cxf.transports.http.QueryHandlerRegistry;
 
 import com.example.tutorial.AddressBookProtos.AddressBook;
 import com.example.tutorial.AddressBookProtos.AddressBookService;
@@ -13,10 +10,9 @@ import com.example.tutorial.AddressBookProtos.AddressBookSize;
 import com.example.tutorial.AddressBookProtos.NamePattern;
 import com.example.tutorial.AddressBookProtos.Person;
 import com.google.protobuf.RpcCallback;
-import com.googlecode.cxf.protobuf.ProtobufQueryHandler;
-import com.googlecode.cxf.protobuf.binding.ProtobufBindingFactory;
 import com.googlecode.cxf.protobuf.client.SimpleRpcChannel;
 import com.googlecode.cxf.protobuf.client.SimpleRpcController;
+import com.googlecode.cxf.protobuf.utils.CXFUtils;
 
 /**
  * Simple client for the addressbook service.
@@ -31,19 +27,7 @@ public class Client {
 	 */
 	public static void main(String[] args) throws EndpointException {
 		// register protocol buffer extensions on cxf bus
-		Bus bus = BusFactory.getDefaultBus();
-		ProtobufBindingFactory protobufBindingFactory = new ProtobufBindingFactory();
-		protobufBindingFactory.setBus(bus);
-
-		BindingFactoryManager manager = bus
-				.getExtension(BindingFactoryManager.class);
-		manager.registerBindingFactory(
-				ProtobufBindingFactory.PROTOBUF_BINDING_ID,
-				protobufBindingFactory);
-
-		QueryHandlerRegistry queryHandlerRegistry = bus
-				.getExtension(QueryHandlerRegistry.class);
-		queryHandlerRegistry.registerHandler(new ProtobufQueryHandler());
+		//CXFUtils.registerProtobufExtensionsOnBus(BusFactory.getDefaultBus());
 
 		System.out.println("Create a person:\n");
 
@@ -80,12 +64,6 @@ public class Client {
 				System.out.println("\nList of people found: \n" + response);
 			}
 		});
-
-		/*
-		 * Assert.assertEquals(1, size.getSize());
-		 * Assert.assertEquals(book.getPersonCount(), 1);
-		 * Assert.assertEquals(book.getPerson(0).getName(), "Bela");
-		 */
 	}
 
 }
