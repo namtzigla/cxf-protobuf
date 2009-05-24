@@ -1,6 +1,5 @@
 package com.googlecode.cxf.protobuf.example.addressbook;
 
-import org.apache.cxf.BusFactory;
 import org.apache.cxf.endpoint.EndpointException;
 
 import com.example.tutorial.AddressBookProtos.AddressBook;
@@ -12,7 +11,6 @@ import com.example.tutorial.AddressBookProtos.Person;
 import com.google.protobuf.RpcCallback;
 import com.googlecode.cxf.protobuf.client.SimpleRpcChannel;
 import com.googlecode.cxf.protobuf.client.SimpleRpcController;
-import com.googlecode.cxf.protobuf.utils.CXFUtils;
 
 /**
  * Simple client for the addressbook service.
@@ -26,9 +24,6 @@ public class Client {
 	 * @throws EndpointException
 	 */
 	public static void main(String[] args) throws EndpointException {
-		// register protocol buffer extensions on cxf bus
-		//CXFUtils.registerProtobufExtensionsOnBus(BusFactory.getDefaultBus());
-
 		System.out.println("Create a person:\n");
 
 		Person.Builder person = Person.newBuilder();

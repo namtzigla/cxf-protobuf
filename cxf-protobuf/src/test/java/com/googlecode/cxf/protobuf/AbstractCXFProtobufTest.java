@@ -8,11 +8,9 @@ import org.apache.cxf.BusFactory;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.test.AbstractCXFTest;
-import org.junit.Before;
 import org.junit.BeforeClass;
 
 import com.google.protobuf.Message;
-import com.googlecode.cxf.protobuf.utils.CXFUtils;
 
 public abstract class AbstractCXFProtobufTest extends AbstractCXFTest {
 
@@ -22,13 +20,6 @@ public abstract class AbstractCXFProtobufTest extends AbstractCXFTest {
 			throw new Exception(
 					"Bus was not null, check cleanup of previously run tests!");
 		}
-	}
-
-	@Before
-	public void setUpBus() throws Exception {
-		super.setUpBus();
-
-		CXFUtils.registerProtobufExtensionsOnBus(BusFactory.getDefaultBus());
 	}
 
 	protected byte[] toBytes(Message message) throws IOException {
