@@ -19,7 +19,7 @@ public class Server {
 		ProtobufServerFactoryBean serverFactoryBean = new ProtobufServerFactoryBean();
 		serverFactoryBean
 				.setAddress("http://localhost:8888/AddressBookService");
-		serverFactoryBean.setServiceBean(new AddressBookServiceImpl());
+		serverFactoryBean.setServiceBean(new AddressBookMessageHandler());
 		serverFactoryBean.setMessageClass(AddressBookServiceMessage.class);
 		serverFactoryBean.create();
 
