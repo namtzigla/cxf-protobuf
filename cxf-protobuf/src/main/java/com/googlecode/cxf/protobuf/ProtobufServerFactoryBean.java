@@ -21,6 +21,8 @@ package com.googlecode.cxf.protobuf;
 
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.cxf.BusException;
 import org.apache.cxf.binding.BindingConfiguration;
 import org.apache.cxf.binding.BindingFactory;
@@ -91,6 +93,7 @@ public class ProtobufServerFactoryBean extends AbstractEndpointFactory {
         }
     }
 
+    @PostConstruct
     public Server create() {
         try {
             initializeDispatcher();
