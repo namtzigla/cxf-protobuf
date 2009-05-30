@@ -13,4 +13,10 @@ cxf-protobuf is a simple integration of Apache CXF, an open source application s
    * integration with CXF's (Spring) configuration
    * description generation for protocol buffer services ?wsdl-style (adopted from the SOAP world) 
 
-== Example 1: !AddressBook  ==
+== Example 1: !AddressBook Service ==
+
+== Example 2: !AddressBook Client ==
+
+== Example 3: !AddressBook Service Configured in Spring ==
+
+== Example 4: !AddressBook Message Handler Service ==
