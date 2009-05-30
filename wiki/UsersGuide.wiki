@@ -4,7 +4,7 @@
 
 == Introduction ==
 
-cxf-protobuf is a simple integration of Apache CXF, an open source application services framework and Google's Protocol Buffers. The main features are
+cxf-protobuf is a simple integration of [http://cxf.apache.org/ Apache CXF], an open source application services framework and [http://code.google.com/p/protobuf/ Google's Protocol Buffers]. The main features are
 
    * *server API for publishing a service that can process protocol buffer messages* 
    * *client API for sending messages to protocol buffer services using CXF's transport infrastructure*
