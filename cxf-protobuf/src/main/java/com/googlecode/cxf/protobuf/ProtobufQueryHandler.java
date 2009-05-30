@@ -105,13 +105,14 @@ public class ProtobufQueryHandler implements StemMatchingQueryHandler {
 			if (serviceClass != null
 					&& Service.class.isAssignableFrom(serviceClass)) {
 				PrintStream out = new PrintStream(os);
-				ProtobufUtils.convertDescriptorToProto(
+				ProtobufUtils.generateProtoFromDescriptor(
 						((ServiceDescriptor) serviceClass.getMethod(
 								"getDescriptor").invoke(null)).getFile(), out);
 				out.flush();
 			} else if (messageClass != null) {
 				PrintStream out = new PrintStream(os);
-				ProtobufUtils.convertDescriptorToProto(
+				out.println("# This is the message type that this service accepts (wrapper message)");
+				ProtobufUtils.generateProtoFromDescriptor(
 						((Descriptor) messageClass.getMethod("getDescriptor")
 								.invoke(null)), out);
 				out.flush();
