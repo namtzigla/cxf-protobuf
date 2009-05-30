@@ -1,4 +1,3 @@
-#summary cxf-protobuf documentation
 = User's Guide to cxf-protobuf =
 
 <wiki:toc max_depth="3" />
