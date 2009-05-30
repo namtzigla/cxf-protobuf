@@ -20,6 +20,9 @@
 package com.googlecode.cxf.protobuf.utils;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 import com.google.protobuf.DescriptorProtos.FileOptions;
 import com.google.protobuf.Descriptors.Descriptor;
@@ -33,8 +36,7 @@ import com.google.protobuf.Descriptors.FieldDescriptor.Type;
 import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.AddressBook;
 
 /**
- * Utilities for converting a protocol buffer service back to .proto
- * source.
+ * Utilities for generateing a protocol buffer service back to .proto source.
  * 
  * @author Gyorgy Orban
  */
@@ -43,41 +45,58 @@ public final class ProtobufUtils {
 	private ProtobufUtils() {
 	}
 
-	public static void convertDescriptorToProto(Descriptor descriptor,
+	public static void generateProtoFromDescriptor(Descriptor descriptor,
 			Appendable out) throws IOException {
-		convertDescriptorToProto(descriptor, out, "");
+		HashMap<Descriptor, Boolean> descriptors = new HashMap<Descriptor, Boolean>();
+		generateProtoFromDescriptor(descriptor, out, descriptors);
 	}
 
-	public static void convertDescriptorToProto(Descriptor descriptor,
-			Appendable out, String indent) throws IOException {
+	public static void generateProtoFromDescriptor(Descriptor descriptor,
+			Appendable out, HashMap<Descriptor, Boolean> descriptors) throws IOException {
+		generateProtoFromDescriptor(descriptor, out, "", descriptors);
+		
+		// make sure all message type definitions are generated
+		for (Descriptor d : new HashSet<Descriptor>(descriptors.keySet())) {
+			if (!descriptors.get(d)) {
+				generateProtoFromDescriptor(d, out, descriptors);
+			}
+		}
+	}
+
+	public static void generateProtoFromDescriptor(Descriptor descriptor,
+			Appendable out, String indent, Map<Descriptor, Boolean> descriptors)
+			throws IOException {
+		descriptors.put(descriptor, true);
+
 		out.append(indent + "message " + descriptor.getName() + " {\n");
 
 		for (FieldDescriptor fieldDescriptor : descriptor.getFields()) {
-			convertDescriptorToProto(fieldDescriptor, out, indent + "    ");
+			generateProtoFromDescriptor(fieldDescriptor, out, indent + "    ", descriptors);
 		}
 
 		for (Descriptor nested : descriptor.getNestedTypes()) {
-			convertDescriptorToProto(nested, out, indent + "    ");
+			generateProtoFromDescriptor(nested, out, indent + "    ",
+					descriptors);
 		}
 
 		for (EnumDescriptor enumDescriptor : descriptor.getEnumTypes()) {
-			convertDescriptorToProto(enumDescriptor, out, indent + "    ");
+			generateProtoFromDescriptor(enumDescriptor, out, indent + "    ");
 		}
 
 		out.append(indent + "}\n");
 	}
 
-	public static void convertDescriptorToProto(EnumDescriptor descriptor,
+	public static void generateProtoFromDescriptor(EnumDescriptor descriptor,
 			Appendable out, String indent) throws IOException {
 		out.append(indent + "enum " + descriptor.getName() + " {\n");
 		for (EnumValueDescriptor valueDescriptor : descriptor.getValues()) {
-			convertDescriptorToProto(valueDescriptor, out, indent + "    ");
+			generateProtoFromDescriptor(valueDescriptor, out, indent + "    ");
 		}
 
 		out.append(indent + "}\n");
 	}
 
-	public static void convertDescriptorToProto(FileDescriptor descriptor,
+	public static void generateProtoFromDescriptor(FileDescriptor descriptor,
 			Appendable out) throws IOException {
 		String package1 = descriptor.getPackage();
 		if (package1 != null) {
@@ -97,28 +116,28 @@ public final class ProtobufUtils {
 		}
 
 		for (ServiceDescriptor serviceDescriptor : descriptor.getServices()) {
-			convertDescriptorToProto(serviceDescriptor, out);
+			generateProtoFromDescriptor(serviceDescriptor, out);
 		}
 
 		for (Descriptor messageDescriptor : descriptor.getMessageTypes()) {
-			convertDescriptorToProto(messageDescriptor, out, "");
+			generateProtoFromDescriptor(messageDescriptor, out, "", new HashMap<Descriptor, Boolean>());
 		}
 
 		for (EnumDescriptor enumDescriptor : descriptor.getEnumTypes()) {
-			convertDescriptorToProto(enumDescriptor, out, "");
+			generateProtoFromDescriptor(enumDescriptor, out, "");
 		}
 	}
 
-	public static void convertDescriptorToProto(ServiceDescriptor descriptor,
-			Appendable out) throws IOException {
+	public static void generateProtoFromDescriptor(
+			ServiceDescriptor descriptor, Appendable out) throws IOException {
 		out.append("service " + descriptor.getName() + " {\n");
 		for (MethodDescriptor methodDescriptor : descriptor.getMethods()) {
-			convertDescriptorToProto(methodDescriptor, out);
+			generateProtoFromDescriptor(methodDescriptor, out);
 		}
 		out.append("}\n");
 	}
 
-	public static void convertDescriptorToProto(MethodDescriptor descriptor,
+	public static void generateProtoFromDescriptor(MethodDescriptor descriptor,
 			Appendable out) throws IOException {
 		out.append("    rpc ");
 		out.append(descriptor.getName());
@@ -128,8 +147,8 @@ public final class ProtobufUtils {
 		out.append(";\n");
 	}
 
-	public static void convertDescriptorToProto(FieldDescriptor descriptor,
-			Appendable out, String indent) throws IOException {
+	public static void generateProtoFromDescriptor(FieldDescriptor descriptor,
+			Appendable out, String indent, Map<Descriptor, Boolean> descriptors) throws IOException {
 		out.append(indent);
 		if (descriptor.isRequired()) {
 			out.append("required ");
@@ -145,6 +164,10 @@ public final class ProtobufUtils {
 
 		if (descriptor.getType().equals(Type.MESSAGE)) {
 			out.append(descriptor.getMessageType().getFullName() + " ");
+			Descriptor messageType = descriptor.getMessageType();
+			if (descriptors.get(messageType) == null) {
+				descriptors.put(messageType, false);
+			}
 		} else if (descriptor.getType().equals(Type.ENUM)) {
 			out.append(descriptor.getEnumType().getFullName() + " ");
 		} else {
@@ -167,8 +190,9 @@ public final class ProtobufUtils {
 		out.append(";\n");
 	}
 
-	public static void convertDescriptorToProto(EnumValueDescriptor descriptor,
-			Appendable out, String indent) throws IOException {
+	public static void generateProtoFromDescriptor(
+			EnumValueDescriptor descriptor, Appendable out, String indent)
+			throws IOException {
 		out.append(indent);
 
 		out.append(descriptor.getName() + " = " + descriptor.getNumber());
@@ -176,7 +200,7 @@ public final class ProtobufUtils {
 	}
 
 	public static void main(String[] args) throws IOException {
-		convertDescriptorToProto(AddressBook.getDescriptor().getFile(),
+		generateProtoFromDescriptor(AddressBook.getDescriptor().getFile(),
 				System.out);
 	}
 
