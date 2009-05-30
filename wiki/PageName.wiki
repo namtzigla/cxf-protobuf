@@ -7,10 +7,10 @@
 
 cxf-protobuf is a simple integration of Apache CXF, an open source application services framework and Google's Protocol Buffers. The main features are
 
-- server API for publishing a service that processes protocol buffer messages 
-- client API for sending messages to protocol buffer services using CXF's transport infrastructure
-- support for both RPC-style dispatching and single message handler style implementation on the server-side
-- integration with CXF's (Spring) configuration
-- description of the protocol buffer services ?wsdl-style (adopted from the SOAP world) 
+   * server API for publishing a service that processes protocol buffer messages 
+   * client API for sending messages to protocol buffer services using CXF's transport infrastructure
+   * support for both RPC-style dispatching and single message handler style implementation on the server-side
+   * integration with CXF's (Spring) configuration
+   * description generation for protocol buffer services ?wsdl-style (adopted from the SOAP world) 
 
 == AddressBook Example ==
