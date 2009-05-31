@@ -1,4 +1,4 @@
-# This is the message you can send to this service (wrapper message)
+// This is the message you can send to this service (wrapper message)
 message AddressBookServiceMessage {
     optional tutorial.Person addPerson = 1;
     optional tutorial.NamePattern listPeople = 2;
