@@ -112,7 +112,7 @@ public class ProtobufQueryHandler implements StemMatchingQueryHandler {
 			} else if (messageClass != null) {
 				PrintStream out = new PrintStream(os);
 				out
-						.println("# This is the message you can send to this service (wrapper message)");
+						.println("// This is the message you can send to this service (wrapper message)");
 				new ProtoGenerator().generateProtoFromDescriptor(
 						((Descriptor) messageClass.getMethod("getDescriptor")
 								.invoke(null)), out);
