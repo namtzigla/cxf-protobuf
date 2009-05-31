@@ -101,6 +101,11 @@ public class ProtoGenerator {
 
 	public void generateProtoFromDescriptor(FileDescriptor descriptor,
 			Appendable out) throws IOException {
+		generateProtoFromDescriptor(descriptor, out, null);
+	}
+	
+	public void generateProtoFromDescriptor(FileDescriptor descriptor,
+			Appendable out, Descriptor wrapperMessage) throws IOException {
 		String package1 = descriptor.getPackage();
 		if (package1 != null) {
 			out.append("package " + package1 + ";\n");
@@ -123,6 +128,10 @@ public class ProtoGenerator {
 		}
 
 		for (Descriptor messageDescriptor : descriptor.getMessageTypes()) {
+			if (wrapperMessage != null && messageDescriptor.equals(wrapperMessage)) {
+				out.append("// This is the message you can send to this service (wrapper message):\n");
+			}
+			
 			generateProtoFromDescriptor(messageDescriptor, out, "",
 					new LinkedHashMap<Descriptor, Boolean>());
 		}

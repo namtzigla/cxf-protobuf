@@ -68,9 +68,6 @@ public class ProtobufServerFactoryBean extends AbstractEndpointFactory {
     public static String PROTOBUF_MESSAGE_CLASS = ProtobufServerFactoryBean.class.getName() + "."
             + "PROTOBUF_MESSAGE_CLASS";
 
-    public static String PROTOBUF_SERVICE_CLASS = ProtobufServerFactoryBean.class.getName() + "."
-            + "PROTOBUF_SERVICE_CLASS";
-
     /**
      * 
      */
@@ -193,7 +190,6 @@ public class ProtobufServerFactoryBean extends AbstractEndpointFactory {
         ei.setName(serviceFactory.getService().getName());
         ei.setAddress(getAddress());
         ei.setProperty(PROTOBUF_MESSAGE_CLASS, messageClass);
-        ei.setProperty(PROTOBUF_SERVICE_CLASS, serviceBean.getClass());
 
         BindingInfo bindingInfo = createBindingInfo();
         ei.setBinding(bindingInfo);

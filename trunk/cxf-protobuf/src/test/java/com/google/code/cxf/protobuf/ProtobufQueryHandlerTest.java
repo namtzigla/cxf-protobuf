@@ -97,6 +97,8 @@ public class ProtobufQueryHandlerTest extends AbstractCXFProtobufTest {
 		byte[] expected = IOUtils.readBytesFromStream(getClass().getResourceAsStream("/com/google/code/cxf/protobuf/AddressBookService.proto"));
 		ByteArrayOutputStream actual = new ByteArrayOutputStream();
 		new ProtobufQueryHandler().writeResponse(null, null, endpointInfo, actual);
+		System.out.println("\nexpected: \n" + new String(expected));
+		System.out.println("\nactual: \n" + new String(actual.toByteArray()));
 		Assert.assertTrue("generated proto description is incorrect", Arrays.equals(expected, actual.toByteArray()));
 	}
 	
@@ -109,7 +111,7 @@ public class ProtobufQueryHandlerTest extends AbstractCXFProtobufTest {
 
 		EndpointInfo endpointInfo = serverFactory.getServer().getEndpoint()
 				.getEndpointInfo();
-		byte[] expected = IOUtils.readBytesFromStream(getClass().getResourceAsStream("/com/google/code/cxf/protobuf/AddressBookServiceMessage.proto"));
+		byte[] expected = IOUtils.readBytesFromStream(getClass().getResourceAsStream("/com/google/code/cxf/protobuf/AddressBookService.proto"));
 		ByteArrayOutputStream actual = new ByteArrayOutputStream();
 		new ProtobufQueryHandler().writeResponse(null, null, endpointInfo, actual);
 		System.out.println("\nexpected: \n" + new String(expected));
