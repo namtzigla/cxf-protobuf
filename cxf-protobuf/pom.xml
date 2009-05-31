@@ -6,6 +6,19 @@
 	<name>cxf-protobuf</name>
 	<version>0.1</version>
 	<description>Google's Protocol Buffer - Apache CXF Integration</description>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>src</descriptorRef>
+						<descriptorRef>project</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
