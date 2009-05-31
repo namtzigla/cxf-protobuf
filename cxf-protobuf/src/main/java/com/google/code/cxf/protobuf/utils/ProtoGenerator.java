@@ -21,8 +21,8 @@ package com.google.code.cxf.protobuf.utils;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 import com.google.protobuf.DescriptorProtos.FileOptions;
@@ -36,14 +36,14 @@ import com.google.protobuf.Descriptors.ServiceDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.Type;
 
 /**
- * Utility for generating .proto source description based on the generated java
+ * Utility for generating .proto source based on the previously generated java
  * classes.
  * 
  * @author Gyorgy Orban
  */
-public class ProtoDescriptionGenerator {
+public class ProtoGenerator {
 
-	public ProtoDescriptionGenerator() {
+	public ProtoGenerator() {
 	}
 
 	public void generateProtoFromDescriptor(Descriptor descriptor,
@@ -52,20 +52,20 @@ public class ProtoDescriptionGenerator {
 		generateProtoFromDescriptor(descriptor, out, descriptors);
 	}
 
-	public void generateProtoFromDescriptor(Descriptor descriptor,
+	private void generateProtoFromDescriptor(Descriptor descriptor,
 			Appendable out, HashMap<Descriptor, Boolean> descriptors)
 			throws IOException {
 		generateProtoFromDescriptor(descriptor, out, "", descriptors);
 
 		// make sure all message type definitions are generated
-		for (Descriptor d : new HashSet<Descriptor>(descriptors.keySet())) {
+		for (Descriptor d : new LinkedHashSet<Descriptor>(descriptors.keySet())) {
 			if (!descriptors.get(d)) {
 				generateProtoFromDescriptor(d, out, descriptors);
 			}
 		}
 	}
 
-	public void generateProtoFromDescriptor(Descriptor descriptor,
+	private void generateProtoFromDescriptor(Descriptor descriptor,
 			Appendable out, String indent, Map<Descriptor, Boolean> descriptors)
 			throws IOException {
 		descriptors.put(descriptor, true);
@@ -89,7 +89,7 @@ public class ProtoDescriptionGenerator {
 		out.append(indent + "}\n");
 	}
 
-	public void generateProtoFromDescriptor(EnumDescriptor descriptor,
+	private void generateProtoFromDescriptor(EnumDescriptor descriptor,
 			Appendable out, String indent) throws IOException {
 		out.append(indent + "enum " + descriptor.getName() + " {\n");
 		for (EnumValueDescriptor valueDescriptor : descriptor.getValues()) {
@@ -132,7 +132,7 @@ public class ProtoDescriptionGenerator {
 		}
 	}
 
-	public void generateProtoFromDescriptor(ServiceDescriptor descriptor,
+	private void generateProtoFromDescriptor(ServiceDescriptor descriptor,
 			Appendable out) throws IOException {
 		out.append("service " + descriptor.getName() + " {\n");
 		for (MethodDescriptor methodDescriptor : descriptor.getMethods()) {
@@ -141,7 +141,7 @@ public class ProtoDescriptionGenerator {
 		out.append("}\n");
 	}
 
-	public void generateProtoFromDescriptor(MethodDescriptor descriptor,
+	private void generateProtoFromDescriptor(MethodDescriptor descriptor,
 			Appendable out) throws IOException {
 		out.append("    rpc ");
 		out.append(descriptor.getName());
@@ -151,7 +151,7 @@ public class ProtoDescriptionGenerator {
 		out.append(";\n");
 	}
 
-	public void generateProtoFromDescriptor(FieldDescriptor descriptor,
+	private void generateProtoFromDescriptor(FieldDescriptor descriptor,
 			Appendable out, String indent, Map<Descriptor, Boolean> descriptors)
 			throws IOException {
 		out.append(indent);
@@ -195,7 +195,7 @@ public class ProtoDescriptionGenerator {
 		out.append(";\n");
 	}
 
-	public void generateProtoFromDescriptor(EnumValueDescriptor descriptor,
+	private void generateProtoFromDescriptor(EnumValueDescriptor descriptor,
 			Appendable out, String indent) throws IOException {
 		out.append(indent);
 

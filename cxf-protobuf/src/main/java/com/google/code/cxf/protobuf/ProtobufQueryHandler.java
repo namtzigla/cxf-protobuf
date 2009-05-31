@@ -31,7 +31,7 @@ import org.apache.cxf.transport.http.UrlUtilities;
 import org.apache.cxf.transports.http.QueryHandlerRegistry;
 import org.apache.cxf.transports.http.StemMatchingQueryHandler;
 
-import com.google.code.cxf.protobuf.utils.ProtoDescriptionGenerator;
+import com.google.code.cxf.protobuf.utils.ProtoGenerator;
 import com.google.protobuf.Message;
 import com.google.protobuf.Service;
 import com.google.protobuf.Descriptors.Descriptor;
@@ -105,7 +105,7 @@ public class ProtobufQueryHandler implements StemMatchingQueryHandler {
 			if (serviceClass != null
 					&& Service.class.isAssignableFrom(serviceClass)) {
 				PrintStream out = new PrintStream(os);
-				new ProtoDescriptionGenerator().generateProtoFromDescriptor(
+				new ProtoGenerator().generateProtoFromDescriptor(
 						((ServiceDescriptor) serviceClass.getMethod(
 								"getDescriptor").invoke(null)).getFile(), out);
 				out.flush();
@@ -113,7 +113,7 @@ public class ProtobufQueryHandler implements StemMatchingQueryHandler {
 				PrintStream out = new PrintStream(os);
 				out
 						.println("# This is the message you can send to this service (wrapper message)");
-				new ProtoDescriptionGenerator().generateProtoFromDescriptor(
+				new ProtoGenerator().generateProtoFromDescriptor(
 						((Descriptor) messageClass.getMethod("getDescriptor")
 								.invoke(null)), out);
 				out.flush();
