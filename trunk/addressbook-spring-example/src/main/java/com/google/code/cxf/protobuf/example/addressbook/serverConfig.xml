@@ -3,11 +3,11 @@
 	xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
-	<bean class="com.googlecode.cxf.protobuf.ProtobufServerFactoryBean"
+	<bean class="com.google.code.cxf.protobuf.ProtobufServerFactoryBean"
 		init-method="create">
 		<property name="address" value="http://localhost:8888/AddressBookService" />
 		<property name="serviceBean">
-			<bean class="com.googlecode.cxf.protobuf.example.addressbook.AddressBookServiceImpl" />
+			<bean class="com.google.code.cxf.protobuf.example.addressbook.AddressBookServiceImpl" />
 		</property>
 		<property name="messageClass"
 			value="com.example.tutorial.AddressBookProtos$AddressBookServiceMessage" />

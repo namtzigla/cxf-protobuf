@@ -1,4 +1,4 @@
-package com.googlecode.cxf.protobuf.example.addressbook;
+package com.google.code.cxf.protobuf.example.addressbook;
 
 import org.apache.cxf.endpoint.EndpointException;
 
@@ -8,9 +8,9 @@ import com.example.tutorial.AddressBookProtos.AddressBookServiceMessage;
 import com.example.tutorial.AddressBookProtos.AddressBookSize;
 import com.example.tutorial.AddressBookProtos.NamePattern;
 import com.example.tutorial.AddressBookProtos.Person;
+import com.google.code.cxf.protobuf.client.SimpleRpcChannel;
+import com.google.code.cxf.protobuf.client.SimpleRpcController;
 import com.google.protobuf.RpcCallback;
-import com.googlecode.cxf.protobuf.client.SimpleRpcChannel;
-import com.googlecode.cxf.protobuf.client.SimpleRpcController;
 
 /**
  * Simple client for the addressbook service.
