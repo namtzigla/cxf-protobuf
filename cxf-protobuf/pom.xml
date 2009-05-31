@@ -4,7 +4,7 @@
 	<groupId>com.googlecode.cxf.protobuf</groupId>
 	<artifactId>cxf-protobuf</artifactId>
 	<name>cxf-protobuf</name>
-	<version>0.1</version>
+	<version>0.2</version>
 	<description>Google's Protocol Buffer - Apache CXF Integration</description>
 	<build>
 		<plugins>
