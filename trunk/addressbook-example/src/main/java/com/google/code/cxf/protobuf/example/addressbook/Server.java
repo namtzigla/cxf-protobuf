@@ -1,4 +1,4 @@
-package com.googlecode.cxf.protobuf.example.addressbook;
+package com.google.code.cxf.protobuf.example.addressbook;
 
 import com.example.tutorial.AddressBookProtos.AddressBookServiceMessage;
 import com.googlecode.cxf.protobuf.ProtobufServerFactoryBean;
