@@ -1,15 +1,15 @@
-package com.googlecode.cxf.protobuf.example.addressbook;
+package com.google.code.cxf.protobuf.example.addressbook;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.tutorial.AddressBookProtos.AddressBook;
+import com.example.tutorial.AddressBookProtos.AddressBookServiceMessage;
+import com.example.tutorial.AddressBookProtos.AddressBookSize;
+import com.example.tutorial.AddressBookProtos.NamePattern;
+import com.example.tutorial.AddressBookProtos.Person;
 import com.google.protobuf.Message;
 import com.googlecode.cxf.protobuf.ProtobufMessageHandler;
-import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.AddressBook;
-import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.AddressBookServiceMessage;
-import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.AddressBookSize;
-import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.NamePattern;
-import com.googlecode.cxf.protobuf.addressbook.AddressBookProtos.Person;
 
 public class AddressBookMessageHandler implements ProtobufMessageHandler {
 	List<Person> records = new ArrayList<Person>();
