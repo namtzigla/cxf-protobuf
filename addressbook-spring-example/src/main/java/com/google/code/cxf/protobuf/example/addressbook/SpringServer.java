@@ -1,4 +1,4 @@
-package com.googlecode.cxf.protobuf.example.addressbook;
+package com.google.code.cxf.protobuf.example.addressbook;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -14,7 +14,7 @@ public class SpringServer {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new ClassPathXmlApplicationContext("classpath:/com/googlecode/cxf/protobuf/example/addressbook/serverConfig.xml");
+		new ClassPathXmlApplicationContext("classpath:/com/google/code/cxf/protobuf/example/addressbook/serverConfig.xml");
 	}
 
 }
