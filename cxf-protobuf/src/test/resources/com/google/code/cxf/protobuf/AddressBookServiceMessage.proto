@@ -3,9 +3,6 @@ message AddressBookServiceMessage {
     optional tutorial.Person addPerson = 1;
     optional tutorial.NamePattern listPeople = 2;
 }
-message NamePattern {
-    optional string pattern = 1;
-}
 message Person {
     required string name = 1;
     required int32 id = 2;
@@ -20,4 +17,7 @@ message Person {
         HOME = 1;
         WORK = 2;
     }
+}
+message NamePattern {
+    optional string pattern = 1;
 }
