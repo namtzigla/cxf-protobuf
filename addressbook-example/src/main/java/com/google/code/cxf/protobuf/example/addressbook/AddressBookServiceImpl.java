@@ -1,4 +1,4 @@
-package com.googlecode.cxf.protobuf.example.addressbook;
+package com.google.code.cxf.protobuf.example.addressbook;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
