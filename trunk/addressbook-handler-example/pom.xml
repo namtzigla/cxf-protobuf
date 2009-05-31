@@ -19,9 +19,9 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>com.googlecode.cxf.protobuf</groupId>
+			<groupId>com.google.code.cxf.protobuf</groupId>
 			<artifactId>cxf-protobuf</artifactId>
-			<version>0.1</version>
+			<version>0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>

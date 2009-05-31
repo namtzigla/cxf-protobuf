@@ -8,8 +8,8 @@ import com.example.tutorial.AddressBookProtos.AddressBookServiceMessage;
 import com.example.tutorial.AddressBookProtos.AddressBookSize;
 import com.example.tutorial.AddressBookProtos.NamePattern;
 import com.example.tutorial.AddressBookProtos.Person;
+import com.google.code.cxf.protobuf.ProtobufMessageHandler;
 import com.google.protobuf.Message;
-import com.googlecode.cxf.protobuf.ProtobufMessageHandler;
 
 public class AddressBookMessageHandler implements ProtobufMessageHandler {
 	List<Person> records = new ArrayList<Person>();

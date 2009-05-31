@@ -1,7 +1,7 @@
 package com.google.code.cxf.protobuf.example.addressbook;
 
 import com.example.tutorial.AddressBookProtos.AddressBookServiceMessage;
-import com.googlecode.cxf.protobuf.ProtobufServerFactoryBean;
+import com.google.code.cxf.protobuf.ProtobufServerFactoryBean;
 
 /**
  * Simple example that publishes Google's addressbook example as a service in
