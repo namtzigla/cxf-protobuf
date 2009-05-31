@@ -1,4 +1,4 @@
-package com.googlecode.cxf.protobuf.example.addressbook;
+package com.google.code.cxf.protobuf.example.addressbook;
 
 import org.apache.cxf.endpoint.EndpointException;
 
