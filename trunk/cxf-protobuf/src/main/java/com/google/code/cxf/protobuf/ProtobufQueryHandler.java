@@ -31,7 +31,7 @@ import org.apache.cxf.transport.http.UrlUtilities;
 import org.apache.cxf.transports.http.QueryHandlerRegistry;
 import org.apache.cxf.transports.http.StemMatchingQueryHandler;
 
-import com.google.code.cxf.protobuf.utils.ProtobufUtils;
+import com.google.code.cxf.protobuf.utils.ProtoDescriptionGenerator;
 import com.google.protobuf.Message;
 import com.google.protobuf.Service;
 import com.google.protobuf.Descriptors.Descriptor;
@@ -43,7 +43,7 @@ import com.google.protobuf.Descriptors.ServiceDescriptor;
  * @author Gyorgy Orban
  */
 public class ProtobufQueryHandler implements StemMatchingQueryHandler {
-    protected Bus bus;
+	protected Bus bus;
 
 	public boolean isRecognizedQuery(String baseUri, String ctx,
 			EndpointInfo endpointInfo, boolean contextMatchExact) {
@@ -105,14 +105,15 @@ public class ProtobufQueryHandler implements StemMatchingQueryHandler {
 			if (serviceClass != null
 					&& Service.class.isAssignableFrom(serviceClass)) {
 				PrintStream out = new PrintStream(os);
-				ProtobufUtils.generateProtoFromDescriptor(
+				new ProtoDescriptionGenerator().generateProtoFromDescriptor(
 						((ServiceDescriptor) serviceClass.getMethod(
 								"getDescriptor").invoke(null)).getFile(), out);
 				out.flush();
 			} else if (messageClass != null) {
 				PrintStream out = new PrintStream(os);
-				out.println("# This is the message type that you can send to this service (wrapper message)");
-				ProtobufUtils.generateProtoFromDescriptor(
+				out
+						.println("# This is the message you can send to this service (wrapper message)");
+				new ProtoDescriptionGenerator().generateProtoFromDescriptor(
 						((Descriptor) messageClass.getMethod("getDescriptor")
 								.invoke(null)), out);
 				out.flush();
@@ -128,11 +129,11 @@ public class ProtobufQueryHandler implements StemMatchingQueryHandler {
 				.getExtension(QueryHandlerRegistry.class);
 		queryHandlerRegistry.registerHandler(new ProtobufQueryHandler());
 	}
-	
+
 	public void setBus(Bus bus) {
 		this.bus = bus;
 	}
-	
+
 	public Bus getBus() {
 		return bus;
 	}
