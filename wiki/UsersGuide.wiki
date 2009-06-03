@@ -260,6 +260,19 @@ public class AddressBookMessageHandler implements
 
 == What if I want to structure my request message differently? ==
 
+If you don't like the simple default RPC method dispatching logic (which matches the field name in the wrapper message with the method name in the service bean) you can plug in your own by implementing the
+
+{{{
+public interface RpcDispatcher {
+
+	Message dispatchMessage(Message message, Object serviceBean);
+}
+}}}
+
+The `dispatchMessage` method will reveive the request message and can decide how to call the target method on the service bean. You can inject the RpcDispatcher instance using the `ProtobufServerFactoryBean.setRpcDispatcher(...)` method. Check out the default implementation in `SimpleRpcDispatcher`.
+
+Similarly, on the client you can implemenent the RpcChannel interface from protobuf as you wish. The default implementation here is `SimpleRpcChannel`.
+
 == What if I want RPC but I find it ugly to extend the generated service class? ==
 
 You can implement your service as a POJO instead. For example, instead of
@@ -282,6 +295,8 @@ you can write
 and not extend `AddressBookService`.
 
 == What if I don't want to use HTTP? ==
+
+You can use whatever transport CXF supports, such as JMS. I am planning to add support for TCP sockets (if does not exist yet for CXF).
 
 == Limitations ==
    * Controller could be implemented better
