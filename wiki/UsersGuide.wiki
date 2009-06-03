@@ -22,7 +22,7 @@ If you want to use Maven, you need to do this:
    * download and install maven
    * download the cxf-protobuf project and unzip it
    * go to its top level directory and build and install it in your local repo: 
-   * `mvn install`
+      * `mvn install`
    * download the project source of an example
    * build it:
       * `mvn jar:jar`
