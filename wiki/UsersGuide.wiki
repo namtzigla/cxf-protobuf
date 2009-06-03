@@ -260,6 +260,27 @@ public class AddressBookMessageHandler implements
 
 == What if I want to structure my request message differently? ==
 
+== What if I want RPC but I find it ugly to extend the generated service class? ==
+
+You can implement your service as a POJO instead. For example, instead of
+
+{{{
+	public void addPerson(RpcController controller,
+			Person request, RpcCallback<AddressBookSize> done) {
+         ...
+	}
+}}}
+
+you can write
+
+{{{
+	public AddressBookSize addPerson(Person request) {
+         ...
+	}
+}}}
+
+and not extend `AddressBookService`.
+
 == What if I don't want to use HTTP? ==
 
 == Limitations ==
