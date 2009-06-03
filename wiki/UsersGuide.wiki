@@ -260,7 +260,7 @@ public class AddressBookMessageHandler implements
 
 == What if I want to structure my request message differently? ==
 
-If you don't like the simple default RPC method dispatching logic (which matches the field name in the wrapper message with the method name in the service bean) you can plug in your own by implementing the
+If you don't like the simple default RPC method dispatching logic (which matches the field name in the wrapper message with the method name in the service bean) you can plug in your own by implementing
 
 {{{
 public interface RpcDispatcher {
@@ -269,7 +269,7 @@ public interface RpcDispatcher {
 }
 }}}
 
-The `dispatchMessage` method will reveive the request message and can decide how to call the target method on the service bean. You can inject the RpcDispatcher instance using the `ProtobufServerFactoryBean.setRpcDispatcher(...)` method. Check out the default implementation in `SimpleRpcDispatcher`.
+The `dispatchMessage` method will reveive the request message and can decide how to call the target method on the service bean. You can inject the `RpcDispatcher` instance using the `ProtobufServerFactoryBean.setRpcDispatcher(...)` method. Check out the default implementation in `SimpleRpcDispatcher`.
 
 Similarly, on the client you can implemenent the RpcChannel interface from protobuf as you wish. The default implementation here is `SimpleRpcChannel`.
 
