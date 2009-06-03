@@ -303,5 +303,5 @@ and not extend `AddressBookService`.
 You can use whatever transport CXF supports, such as JMS. I am planning to add support for TCP sockets (if someone has not implemented it yet for CXF).
 
 == Limitations ==
-   * Controller could be implemented better
+   * More features of RpcController could be supported
    * Raw (non HTTP) socket support would be nice
