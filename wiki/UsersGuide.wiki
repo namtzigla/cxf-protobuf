@@ -142,7 +142,7 @@ To publish this class as a service (assuming you have the CXF dependency jars an
 		serverFactoryBean.create();
 }}}
 
-and that is all, your service is listening at http://localhost:8888/AddressBookService. You can get the "description" of the service by entering http://localhost:8888/AddressBookService?proto in a browser. The generated description will contain exactly the same as the original addressbook.proto, so it can be used to generate a client that can call this service.
+and that is all, your service is listening at http://localhost:8888/AddressBookService. You can get the "description" of the service by entering http://localhost:8888/AddressBookService?proto in a browser. The generated description will contain the same information as the original addressbook.proto, so it can be used to generate a client that can call this service.
 
 === Example 2: !AddressBook client ===
 
