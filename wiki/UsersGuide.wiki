@@ -262,3 +262,5 @@ public class AddressBookMessageHandler implements
 == What if I don't want to use HTTP? ==
 
 == Limitations ==
+   * Controller could be implemented better
+   * Raw (no HTTP) socket support would be nice
