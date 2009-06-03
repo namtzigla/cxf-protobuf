@@ -26,7 +26,7 @@ import com.google.protobuf.Message;
  * 
  * @author Gyorgy Orban
  */
-public interface ProtobufMessageHandler {
+public interface ProtobufMessageHandler<REQUEST extends Message> {
 
-	Message handleMessage(Message message);
+	Message handleMessage(REQUEST message);
 }
