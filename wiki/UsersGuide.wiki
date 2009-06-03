@@ -90,7 +90,7 @@ All we need to do now is put these definitions in a file (addressbook.proto) and
 
 {{{ protoc --java_out=. addressbook.proto }}}
 
-This will generate the class `com.example.tutorial.AddressBookProtos`. This class contains the service interface and stub and all message types. The service interface (which is actually an abstract class) is called `com.example.tutorial.AddressBookProtos.AddressBookService`, you need to implement this:
+This will generate the class `com.example.tutorial.AddressBookProtos`. This class contains the service interface and stub and all message types. The service interface (which is actually an abstract class) is called `com.example.tutorial.AddressBookProtos.AddressBookService`, you need to implement it like, for example:
 
 {{{
 public class AddressBookServiceImpl extends AddressBookService {
@@ -117,6 +117,17 @@ public class AddressBookServiceImpl extends AddressBookService {
 				records.size()).build());
 	}
 }
+}}}
+
+To publish the AddressBookServiceImpl class as a service:
+
+{{{
+		ProtobufServerFactoryBean serverFactoryBean = new ProtobufServerFactoryBean();
+		serverFactoryBean
+				.setAddress("http://localhost:8888/AddressBookService");
+		serverFactoryBean.setServiceBean(new AddressBookServiceImpl());
+		serverFactoryBean.setMessageClass(AddressBookServiceMessage.class);
+		serverFactoryBean.create();
 }}}
 
 === Example 2: !AddressBook client ===
