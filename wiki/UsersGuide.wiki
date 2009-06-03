@@ -53,7 +53,34 @@ message AddressBook {
 }
 }}}
 
-First I added a few extra messages to the ad
+To make it a service, we need a service definition and a few extra messages:
+
+{{{
+service AddressBookService {
+  rpc addPerson(Person) returns(AddressBookSize);
+  rpc listPeople(NamePattern) returns(AddressBook);
+}
+
+message AddressBookSize {
+  optional int32 size = 1;
+}
+
+message NamePattern {
+  optional string pattern = 1;
+}
+
+}}}
+
+So, we have the addPerson and listPeople operations: addPerson adds a new Person to the address book and returns the current size of the book; listPeople returns a subset of the address book that matches the name pattern passed.
+
+Because protocol buffer messages are not self-describing, we need a "wrapper" message that the server expects to come in on the wire. The structure of the wrapper message is up to the developer of the service. In this case, for each operation the wrapper message has a field with the same name and with the type of the operation's parameter:
+
+{{{
+message AddressBookServiceMessage {
+  optional Person addPerson = 1;
+  optional NamePattern listPeople = 2;
+}
+}}}
 
 
 === Example 2: !AddressBook client ===
