@@ -97,7 +97,7 @@ message AddressBookServiceMessage {
 }
 }}}
 
-I chose the name AddressBookServiceMessage to make it clear that AddressBookService always expects this type of message as the request. The client can decide which operation he or she wants to invoke by filling in the corresponding field in AddressBookServiceMessage (because of this, each field is declared optional). It is important to note that this is just a convention, you can choose other ways to structure your request message.
+I chose the name `AddressBookServiceMessage` to make it clear that our `AddressBookService` implementation always expects this type of message as the request. The client can decide which operation he or she wants to invoke by filling in the corresponding field in AddressBookServiceMessage (because of this, each field is declared optional). It is important to note that this is just a convention, you can choose other ways to structure your request message.
 
 All we need to do now is put these definitions in a file (addressbook.proto) and generate the java stub for the service and messages:
 
