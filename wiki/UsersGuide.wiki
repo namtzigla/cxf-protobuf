@@ -269,7 +269,7 @@ public interface RpcDispatcher {
 }
 }}}
 
-The `dispatchMessage` method will reveive the request message and can decide how to call the target method on the service bean. You can inject the `RpcDispatcher` instance using the `ProtobufServerFactoryBean.setRpcDispatcher(...)` method. Check out the default implementation in `SimpleRpcDispatcher`.
+The `dispatchMessage` method will receive the request message and can decide how to call the target method on the service bean. You can inject your `RpcDispatcher` implementation using the `ProtobufServerFactoryBean.setRpcDispatcher(...)` method. Check out the default implementation in `SimpleRpcDispatcher`.
 
 Similarly, on the client you can implemenent the RpcChannel interface from protobuf as you wish. The default implementation here is `SimpleRpcChannel`.
 
@@ -296,7 +296,7 @@ and not extend `AddressBookService`.
 
 == What if I don't want to use HTTP? ==
 
-You can use whatever transport CXF supports, such as JMS. I am planning to add support for TCP sockets (if does not exist yet for CXF).
+You can use whatever transport CXF supports, such as JMS. I am planning to add support for TCP sockets (if someone has not implemented it yet for CXF).
 
 == Limitations ==
    * Controller could be implemented better
