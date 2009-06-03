@@ -35,7 +35,7 @@ If you want to use Maven, you need to do this:
 
 You can download this example at ...
 
-All examples are built around the "address book" protocol buffer sample that you can find in [http://code.google.com/apis/protocolbuffers/docs/javatutorial.html Google's tutorial]: 
+All examples are built around the "address book" protocol buffer example that you can find in [http://code.google.com/apis/protocolbuffers/docs/javatutorial.html Google's tutorial]: 
 
 
 {{{
