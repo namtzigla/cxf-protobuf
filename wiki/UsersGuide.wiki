@@ -13,7 +13,7 @@ cxf-protobuf is a simple integration of [http://cxf.apache.org/ Apache CXF], an 
 
 == Examples ==
 
-You can get the examples at the downloads page. You will need Maven to build them. As an alternative, you can get the following jars manually and compile the examples against them with any tool or IDE you like:
+You can get the examples at the downloads page. You will need Maven to build them or, as an alternative, you can get the following jars manually and compile the examples against them with any tool or IDE you like:
    * CXF jars and dependencies
    * cxf-protobuf jar
 You need to put these jars in your classpath to compile and run the examples.
