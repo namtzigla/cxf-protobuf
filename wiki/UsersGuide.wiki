@@ -199,26 +199,25 @@ You can download this example at ...
 If you don't like RPC, or just simply want to handle the entire request message in your code, you can implement the `com.google.code.cxf.protobuf.ProtobufMessageHandler` interface:
 
 {{{
-public interface ProtobufMessageHandler {
+public interface ProtobufMessageHandler<REQUEST extends Message> {
 
-	Message handleMessage(Message message);
+	Message handleMessage(REQUEST message);
 }
 }}} 
 
 If you implement this your `handleMessage` method will receive the request message directly:
 
 {{{
-
-public class AddressBookMessageHandler implements ProtobufMessageHandler {
+public class AddressBookMessageHandler implements
+		ProtobufMessageHandler<AddressBookServiceMessage> {
 	Map<Integer, Person> records = new ConcurrentHashMap<Integer, Person>();
 
-	public Message handleMessage(Message message) {
-		AddressBookServiceMessage searchServiceMessage = (AddressBookServiceMessage) message;
+	public Message handleMessage(AddressBookServiceMessage message) {
 
-		if (searchServiceMessage.hasField(AddressBookServiceMessage
-				.getDescriptor().findFieldByName("listPeople"))) {
+		if (message.hasField(AddressBookServiceMessage.getDescriptor()
+				.findFieldByName("listPeople"))) {
 			AddressBook.Builder addressbook = AddressBook.newBuilder();
-			NamePattern request = searchServiceMessage.getListPeople();
+			NamePattern request = message.getListPeople();
 
 			for (Person person : records.values()) {
 				if (person.getName().indexOf(request.getPattern()) >= 0) {
@@ -227,10 +226,10 @@ public class AddressBookMessageHandler implements ProtobufMessageHandler {
 			}
 
 			return addressbook.build();
-		} else if (searchServiceMessage.hasField(AddressBookServiceMessage
-				.getDescriptor().findFieldByName("addPerson"))) {
+		} else if (message.hasField(AddressBookServiceMessage.getDescriptor()
+				.findFieldByName("addPerson"))) {
 
-			Person request = searchServiceMessage.getAddPerson();
+			Person request = message.getAddPerson();
 			if (records.containsKey(request.getId())) {
 				System.out.println("Warning: will replace existing person: "
 						+ records.get(request.getId()));
