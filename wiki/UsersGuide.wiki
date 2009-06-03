@@ -258,9 +258,13 @@ public class AddressBookMessageHandler implements
 }
 }}}
 
-== What if I want to structure my request message differently? ==
+== What if I don't want RPC or want to structure my request message differently? ==
 
-If you don't like the simple default RPC method dispatching logic (which matches the field name in the wrapper message with the method name in the service bean) you can plug in your own by implementing
+You have two options:
+
+   * You can implement the `ProtobufMessageHandler` interface (check out Example 4) which gives you full control over the request message and does not impose any RPC logic on you. 
+
+   * If you just don't like the simple default RPC method dispatching logic and wrapper message format (which matches the field name in the wrapper message with the method name in the service bean) you can plug in your own by implementing
 
 {{{
 public interface RpcDispatcher {
@@ -271,7 +275,7 @@ public interface RpcDispatcher {
 
 The `dispatchMessage` method will receive the request message and can decide how to call the target method on the service bean. You can inject your `RpcDispatcher` implementation using the `ProtobufServerFactoryBean.setRpcDispatcher(...)` method. Check out the default implementation in `SimpleRpcDispatcher`.
 
-Similarly, on the client you can implemenent the RpcChannel interface from protobuf as you wish. The default implementation here is `SimpleRpcChannel`.
+Similarly, on the client side you can implemenent the `RpcChannel` interface from protobuf as you wish. The default implementation here is `SimpleRpcChannel`.
 
 == What if I want RPC but I find it ugly to extend the generated service class? ==
 
