@@ -119,16 +119,17 @@ public class AddressBookServiceImpl extends AddressBookService {
 }
 }}}
 
-To publish the AddressBookServiceImpl class as a service:
+To publish this class as a service (assuming you have the CXF dependency jars and the cxf-protobuf jar on your classpath):
 
 {{{
 		ProtobufServerFactoryBean serverFactoryBean = new ProtobufServerFactoryBean();
-		serverFactoryBean
-				.setAddress("http://localhost:8888/AddressBookService");
+		serverFactoryBean.setAddress("http://localhost:8888/AddressBookService");
 		serverFactoryBean.setServiceBean(new AddressBookServiceImpl());
 		serverFactoryBean.setMessageClass(AddressBookServiceMessage.class);
 		serverFactoryBean.create();
 }}}
+
+and that is all, your service is listening at http://localhost:8888/AddressBookService. You can get the "description" of the service by entering http://localhost:8888/AddressBookService?proto in a browser. This contains the same as the original addressbook.proto, so it can be used to generate a client that can call this service.
 
 === Example 2: !AddressBook client ===
 
