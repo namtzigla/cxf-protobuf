@@ -129,9 +129,42 @@ To publish this class as a service (assuming you have the CXF dependency jars an
 		serverFactoryBean.create();
 }}}
 
-and that is all, your service is listening at http://localhost:8888/AddressBookService. You can get the "description" of the service by entering http://localhost:8888/AddressBookService?proto in a browser. This contains the same as the original addressbook.proto, so it can be used to generate a client that can call this service.
+and that is all, your service is listening at http://localhost:8888/AddressBookService. You can get the "description" of the service by entering http://localhost:8888/AddressBookService?proto in a browser. The description will contain the same as the original addressbook.proto, so it can be used to generate a client that can call this service.
 
 === Example 2: !AddressBook client ===
+
+This example can be downloaded at
+
+In this example we create a client for the service we just set up. First, you need download the description of the service from http://localhost:8888/AddressBookService?proto
+
+Let's say you saved it as addressbook.proto, now generate the java stub and message types: 
+
+{{{ protoc --java_out=. addressbook.proto }}}
+
+Now all you need to do is 
+
+{{{
+	AddressBookService service = AddressBookService.newStub(new SimpleRpcChannel("http://localhost:8888/AddressBookService", AddressBookServiceMessage.class));
+}}}
+
+You can use this service interface to call the actual service methods via RPC, for example:
+
+{{{
+		Person.Builder person = Person.newBuilder();
+
+		person.setId(1);
+		person.setName("Alice");
+
+	        SimpleRpcController controller = new SimpleRpcController();
+
+		service.addPerson(controller, alice, new RpcCallback<AddressBookSize>() {
+			public void run(AddressBookSize size) {
+				System.out.println("\nThere are " + size.getSize()
+						+ " person(s) in the address book now.");
+			}
+		});
+
+}}}
 
 === Example 3: !AddressBook service configured in Spring ===
 
