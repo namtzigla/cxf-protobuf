@@ -262,7 +262,7 @@ public class AddressBookMessageHandler implements
 
 You have two options:
 
-   * You can implement the `ProtobufMessageHandler` interface (check out Example 4) which gives you full control over the request message and does not impose any RPC logic on you. 
+   * You can implement the `ProtobufMessageHandler` interface (check out Example 4) which gives you full control over the request message and does not impose any particular RPC logic on you. 
 
    * If you just don't like the simple default RPC method dispatching logic and wrapper message format (which matches the field name in the wrapper message with the method name in the service bean) you can plug in your own by implementing
 
