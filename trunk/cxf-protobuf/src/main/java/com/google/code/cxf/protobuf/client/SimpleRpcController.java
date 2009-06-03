@@ -23,7 +23,7 @@ import com.google.protobuf.RpcCallback;
 import com.google.protobuf.RpcController;
 
 /**
- * RPC controller for the CXF simple RPC implementation.
+ * RPC controller for the simple RPC implementation.
  * 
  * @author Gyorgy Orban
  */
@@ -46,7 +46,6 @@ public class SimpleRpcController implements RpcController {
 	}
 
 	public void reset() {
-		throw new UnsupportedOperationException();
 	}
 
 	public void setFailed(String arg0) {
