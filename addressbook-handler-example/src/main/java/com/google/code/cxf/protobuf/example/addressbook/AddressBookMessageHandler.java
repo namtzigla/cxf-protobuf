@@ -11,19 +11,16 @@ import com.example.tutorial.AddressBookProtos.Person;
 import com.google.code.cxf.protobuf.ProtobufMessageHandler;
 import com.google.protobuf.Message;
 
-public class AddressBookMessageHandler implements ProtobufMessageHandler {
+public class AddressBookMessageHandler implements
+		ProtobufMessageHandler<AddressBookServiceMessage> {
 	Map<Integer, Person> records = new ConcurrentHashMap<Integer, Person>();
 
-	/**
-	 * @see com.googlecode.cxf.protobuf.ProtobufMessageHandler#handleMessage(com.google.protobuf.Message)
-	 */
-	public Message handleMessage(Message message) {
-		AddressBookServiceMessage searchServiceMessage = (AddressBookServiceMessage) message;
+	public Message handleMessage(AddressBookServiceMessage message) {
 
-		if (searchServiceMessage.hasField(AddressBookServiceMessage
-				.getDescriptor().findFieldByName("listPeople"))) {
+		if (message.hasField(AddressBookServiceMessage.getDescriptor()
+				.findFieldByName("listPeople"))) {
 			AddressBook.Builder addressbook = AddressBook.newBuilder();
-			NamePattern request = searchServiceMessage.getListPeople();
+			NamePattern request = message.getListPeople();
 
 			for (Person person : records.values()) {
 				if (person.getName().indexOf(request.getPattern()) >= 0) {
@@ -32,10 +29,10 @@ public class AddressBookMessageHandler implements ProtobufMessageHandler {
 			}
 
 			return addressbook.build();
-		} else if (searchServiceMessage.hasField(AddressBookServiceMessage
-				.getDescriptor().findFieldByName("addPerson"))) {
+		} else if (message.hasField(AddressBookServiceMessage.getDescriptor()
+				.findFieldByName("addPerson"))) {
 
-			Person request = searchServiceMessage.getAddPerson();
+			Person request = message.getAddPerson();
 			if (records.containsKey(request.getId())) {
 				System.out.println("Warning: will replace existing person: "
 						+ records.get(request.getId()));
