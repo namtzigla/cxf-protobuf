@@ -169,3 +169,9 @@ You can use this service interface to call the actual service methods via RPC, f
 === Example 3: !AddressBook service configured in Spring ===
 
 === Example 4: !AddressBook message handler service ===
+
+== What if I want to structure my request message differently? ==
+
+== What if I don't want to use HTTP? ==
+
+== Limitations ==
