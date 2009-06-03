@@ -28,6 +28,7 @@ If you want to use Maven, you need to do this:
    * download the project source of an example
    * build it:
       * `mvn jar:jar`
+   * jar is generated in the target/ directory
    * run the `com.google.code.cxf.protobuf.example.addressbook.Server` class for the server and the `com.google.code.cxf.protobuf.example.addressbook.Client` class for the client
 
 === Example 1: !AddressBook service ===
@@ -263,4 +264,4 @@ public class AddressBookMessageHandler implements
 
 == Limitations ==
    * Controller could be implemented better
-   * Raw (no HTTP) socket support would be nice
+   * Raw (non HTTP) socket support would be nice
