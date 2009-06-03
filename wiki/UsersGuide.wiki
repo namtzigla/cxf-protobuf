@@ -183,7 +183,7 @@ You can use this service interface to call the actual service methods via RPC, f
 
 You can download this example at
 
-This example is basically the same as Example1, with the only difference that the server is now configured in Spring:
+This example is basically the same as Example1, with the only difference that the server is now configured in the serverConfig.xml Spring config file:
 
 {{{
 ...
