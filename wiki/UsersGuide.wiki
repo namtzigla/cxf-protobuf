@@ -150,7 +150,7 @@ This example can be downloaded at
 
 In this example we create a client for the service we just set up. First, you need download the description of the service from http://localhost:8888/AddressBookService?proto
 
-Let's say you saved it as addressbook.proto, now generate the java stub and message types: 
+Let's say you saved it as addressbook.proto, now you can generate the java stub and message types: 
 
 {{{ protoc --java_out=. addressbook.proto }}}
 
