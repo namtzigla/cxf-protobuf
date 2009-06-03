@@ -82,7 +82,7 @@ message AddressBookServiceMessage {
 }
 }}}
 
-I chose the name AddressBookServiceMessage to make it clear that AddressBookService always expects this type of message as the request. The client can decide which operation he or she wants to invoke by filling in the corresponding field in AddressBookServiceMessage (because of this, each field is declared optional)
+I chose the name AddressBookServiceMessage to make it clear that AddressBookService always expects this type of message as the request. The client can decide which operation he or she wants to invoke by filling in the corresponding field in AddressBookServiceMessage (because of this, each field is declared optional). It is important to note that this is just my convention, you can choose other ways to structure your request message.
 
 
 === Example 2: !AddressBook client ===
