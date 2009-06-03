@@ -68,7 +68,7 @@ message AddressBook {
 }
 }}}
 
-To make it a service, we need a service definition and a few extra messages:
+To make it a service we need a service definition and a few extra messages:
 
 {{{
 service AddressBookService {
