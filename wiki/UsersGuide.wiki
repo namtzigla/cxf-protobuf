@@ -75,7 +75,7 @@ message NamePattern {
 
 So, we have the addPerson and listPeople operations: addPerson adds a new Person to the address book and returns the current size of the book; listPeople returns a subset of the address book that matches the name pattern passed.
 
-Because protocol buffer messages are not self-describing, we need a "wrapper" message that the server expects to come in on the wire. The structure of the wrapper message is up to the developer of the service. In this case, for each operation the wrapper message has a field with the same name and with the type of the operation's parameter:
+Because protocol buffer messages are not self-describing, we need a "wrapper" message that the server expects to come in on the wire. The structure of the wrapper message is up to the developer of the service. In this case, for each operation in `AddressBookService` the wrapper message has a field with the same name and with the type of the operation's parameter:
 
 {{{
 message AddressBookServiceMessage {
@@ -147,7 +147,7 @@ Now all you need to do is
 	AddressBookService service = AddressBookService.newStub(new SimpleRpcChannel("http://localhost:8888/AddressBookService", AddressBookServiceMessage.class));
 }}}
 
-You can use this service interface to call the actual service methods via RPC, for example:
+You can use this service interface to call the actual service methods via RPC, for example, if you want to add a person:
 
 {{{
 		Person.Builder person = Person.newBuilder();
@@ -168,7 +168,83 @@ You can use this service interface to call the actual service methods via RPC, f
 
 === Example 3: !AddressBook service configured in Spring ===
 
+You can download this example at
+
+This example is basically the same as Example1, with the only difference that the server is now configured in Spring:
+
+{{{
+...
+	<bean class="com.google.code.cxf.protobuf.ProtobufServerFactoryBean"
+		init-method="create">
+		<property name="address" value="http://localhost:8888/AddressBookService" />
+		<property name="serviceBean">
+			<bean class="com.google.code.cxf.protobuf.example.addressbook.AddressBookServiceImpl" />
+		</property>
+		<property name="messageClass"
+			value="com.example.tutorial.AddressBookProtos$AddressBookServiceMessage" />
+	</bean>
+...
+}}}
+
+and the java code to start up the server:
+
+{{{
+		new ClassPathXmlApplicationContext("classpath:/com/google/code/cxf/protobuf/example/addressbook/serverConfig.xml");
+}}}
+
 === Example 4: !AddressBook message handler service ===
+
+You can download this example at ...
+
+If you don't like RPC, or just simply want to handle the entire request message in your code, you can implement the `com.google.code.cxf.protobuf.ProtobufMessageHandler` interface:
+
+{{{
+public interface ProtobufMessageHandler {
+
+	Message handleMessage(Message message);
+}
+}}} 
+
+If you implement this your `handleMessage` method will receive the request message directly:
+
+{{{
+
+public class AddressBookMessageHandler implements ProtobufMessageHandler {
+	Map<Integer, Person> records = new ConcurrentHashMap<Integer, Person>();
+
+	public Message handleMessage(Message message) {
+		AddressBookServiceMessage searchServiceMessage = (AddressBookServiceMessage) message;
+
+		if (searchServiceMessage.hasField(AddressBookServiceMessage
+				.getDescriptor().findFieldByName("listPeople"))) {
+			AddressBook.Builder addressbook = AddressBook.newBuilder();
+			NamePattern request = searchServiceMessage.getListPeople();
+
+			for (Person person : records.values()) {
+				if (person.getName().indexOf(request.getPattern()) >= 0) {
+					addressbook.addPerson(person);
+				}
+			}
+
+			return addressbook.build();
+		} else if (searchServiceMessage.hasField(AddressBookServiceMessage
+				.getDescriptor().findFieldByName("addPerson"))) {
+
+			Person request = searchServiceMessage.getAddPerson();
+			if (records.containsKey(request.getId())) {
+				System.out.println("Warning: will replace existing person: "
+						+ records.get(request.getId()));
+			}
+			records.put(request.getId(), request);
+			return AddressBookSize.newBuilder().setSize(records.size()).build();
+		} else {
+			throw new RuntimeException("Payload not found in message "
+					+ message);
+		}
+	}
+
+}
+}}}
 
 == What if I want to structure my request message differently? ==
 
