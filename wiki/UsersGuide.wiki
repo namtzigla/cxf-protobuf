@@ -21,10 +21,8 @@ You need to put these jars in your classpath to compile and run the examples.
 If you want to use Maven, you need to do this:
    * download and install maven
    * download the cxf-protobuf project and unzip it
-   * go to its top level directory and build it: 
-      * `mvn jar:jar`
-   * install it in your local repository: 
-      * `mvn install`
+   * go to its top level directory and build and install it in your local repo: 
+   * `mvn install`
    * download the project source of an example
    * build it:
       * `mvn jar:jar`
