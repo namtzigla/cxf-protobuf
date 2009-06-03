@@ -11,6 +11,8 @@ cxf-protobuf is a simple integration of [http://cxf.apache.org/ Apache CXF], an 
    * *Simple configuration in Spring, integration with CXF's configuration*
    * *?WSDL-style description generation for protocol buffer services (idea adopted from the SOAP world)* 
 
+cxf-protobuf is implemented as an extension to the CXF framework and makes use of CXF's standard (Spring-based) extension mechanisms.
+
 == Examples ==
 
 You can get the examples at the downloads page. You will need Maven to build them or, as an alternative, you can get the following jars manually and compile the examples against them with any tool or IDE you like:
