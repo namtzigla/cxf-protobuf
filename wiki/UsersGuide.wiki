@@ -196,7 +196,7 @@ and the java code to start up the server:
 
 You can download this example at ...
 
-If you don't like RPC, or just simply want to handle the entire request message in your code, you can implement the `com.google.code.cxf.protobuf.ProtobufMessageHandler` interface:
+If you don't like RPC, don't want to define a service in your .proto file, or just simply want to handle the entire request message in your code, you can implement the `com.google.code.cxf.protobuf.ProtobufMessageHandler` interface:
 
 {{{
 public interface ProtobufMessageHandler<REQUEST extends Message> {
@@ -205,7 +205,7 @@ public interface ProtobufMessageHandler<REQUEST extends Message> {
 }
 }}} 
 
-If you implement this your `handleMessage` method will receive the request message directly:
+If you implement this your `handleMessage` method will receive the entire request message directly (no dispatching to service methods):
 
 {{{
 public class AddressBookMessageHandler implements
