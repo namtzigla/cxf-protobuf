@@ -31,11 +31,11 @@ If you want to use Maven, you need to do this:
    * jar is generated in the target/ directory
    * run the `com.google.code.cxf.protobuf.example.addressbook.Server` class for the server and the `com.google.code.cxf.protobuf.example.addressbook.Client` class for the client
 
-You can also import the example projects in Eclipse if you want (you will need the [http://m2eclipse.codehaus.org/ Eclipse Maven plugin].
+You can also import the example projects in Eclipse (you will need the [http://m2eclipse.codehaus.org/ Eclipse Maven plugin]).
 
 === Example 1: !AddressBook service ===
 
-You can download this example at ...
+You can download this example [http://cxf-protobuf.googlecode.com/files/addressbook-example-0.3-project.zip here].
 
 All examples are built around the "address book" protocol buffer example that you can find in [http://code.google.com/apis/protocolbuffers/docs/javatutorial.html Google's tutorial]: 
 
@@ -148,7 +148,7 @@ and that is all, your service is listening at http://localhost:8888/AddressBookS
 
 === Example 2: !AddressBook client ===
 
-This example can be downloaded at
+You can download this example [http://cxf-protobuf.googlecode.com/files/addressbook-example-0.3-project.zip here] (Client.java in the same project as the previous example).
 
 In this example we create a client for the service we have just set up. First, you need to download the description of the service from http://localhost:8888/AddressBookService?proto
 
@@ -183,7 +183,7 @@ You can use this service interface to call the actual service methods via RPC, f
 
 === Example 3: !AddressBook service configured in Spring ===
 
-You can download this example at
+You can download this example [http://cxf-protobuf.googlecode.com/files/addressbook-spring-example-0.3-project.zip here].
 
 This example is basically the same as Example1, with the only difference that the server is now configured in the serverConfig.xml Spring config file:
 
