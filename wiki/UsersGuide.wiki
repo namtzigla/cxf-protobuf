@@ -209,7 +209,7 @@ and the java code to start up the server:
 
 === Example 4: !AddressBook message handler service ===
 
-You can download this example at ...
+You can download this example [http://cxf-protobuf.googlecode.com/files/addressbook-handler-example-0.3-project.zip here].
 
 If you don't like RPC or don't want to define a service in your .proto file, or just simply want to handle the entire request message in your code, you can implement the `com.google.code.cxf.protobuf.ProtobufMessageHandler` interface:
 
