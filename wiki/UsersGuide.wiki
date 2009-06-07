@@ -16,13 +16,13 @@ cxf-protobuf is implemented as an extension to the CXF framework and makes use o
 == Examples ==
 
 You can get the examples at the downloads page. You will need Maven to build them or, as an alternative, you can get the following jars manually and compile the examples against them with any tool or IDE you like:
-   * [http://www.apache.org/dyn/closer.cgi?path=%2Fcxf%2F2.2.2%2Fapache-cxf-2.2.2.zip CXF jars and dependencies]
+   * [http://www.apache.org/dyn/closer.cgi?path=%2Fcxf%2F2.2.2%2Fapache-cxf-2.2.2.zip CXF jars and dependencies] - everything from the lib folder
    * [http://cxf-protobuf.googlecode.com/files/cxf-protobuf-0.3.jar cxf-protobuf jar]
-You need to put these jars in your classpath to compile and run the examples.
+You need to put these jars on your classpath to compile and run the examples.
 
 If you want to use Maven, you need to do this:
-   * download and install maven
-   * download the cxf-protobuf project and unzip it
+   * download and install [http://maven.apache.org/download.html Maven]
+   * download the [http://cxf-protobuf.googlecode.com/files/cxf-protobuf-0.3-project.zip cxf-protobuf project] and unzip it
    * go to its top level directory and build and install it in your local repo: 
       * `mvn install`
    * download the project source of an example
