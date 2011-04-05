@@ -63,7 +63,7 @@ public class AddressBookMessageHandlerTest extends AbstractCXFProtobufTest {
 		serverFactoryBean.setMessageClass(AddressBookServiceMessage.class);
 		Server server = serverFactoryBean.create();
 		
-		List<Interceptor> interceptors = server.getEndpoint().getInInterceptors();
+		List<Interceptor<? extends org.apache.cxf.message.Message>> interceptors = server.getEndpoint().getInInterceptors();
 		System.out.println(interceptors);
 		assertEquals(0, interceptors.size());
 		

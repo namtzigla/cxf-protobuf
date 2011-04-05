@@ -265,14 +265,10 @@ public class ProtobufClient extends AbstractBasicInterceptorProvider implements
 					if (exception == null) {
 						PhaseManager pm = bus.getExtension(PhaseManager.class);
 
-						@SuppressWarnings("unchecked")
-						List<Interceptor> i1 = bus.getInInterceptors();
-						@SuppressWarnings("unchecked")
-						List<Interceptor> i2 = endpoint.getInInterceptors();
-						@SuppressWarnings("unchecked")
-						List<Interceptor> i3 = getInInterceptors();
-						@SuppressWarnings("unchecked")
-						List<Interceptor> i4 = endpoint.getBinding()
+						List<Interceptor<? extends org.apache.cxf.message.Message>> i1 = bus.getInInterceptors();
+						List<Interceptor<? extends org.apache.cxf.message.Message>> i2 = endpoint.getInInterceptors();
+						List<Interceptor<? extends org.apache.cxf.message.Message>> i3 = getInInterceptors();
+						List<Interceptor<? extends org.apache.cxf.message.Message>> i4 = endpoint.getBinding()
 								.getInInterceptors();
 
 						PhaseInterceptorChain chain = inboundChainCache.get(pm
@@ -326,14 +322,10 @@ public class ProtobufClient extends AbstractBasicInterceptorProvider implements
 		Endpoint endpoint = getEndpoint(exchange);
 
 		PhaseManager pm = bus.getExtension(PhaseManager.class);
-		@SuppressWarnings("unchecked")
-		List<Interceptor> i1 = bus.getOutInterceptors();
-		@SuppressWarnings("unchecked")
-		List<Interceptor> i2 = endpoint.getOutInterceptors();
-		@SuppressWarnings("unchecked")
-		List<Interceptor> i3 = getOutInterceptors();
-		@SuppressWarnings("unchecked")
-		List<Interceptor> i4 = endpoint.getBinding().getOutInterceptors();
+		List<Interceptor<? extends org.apache.cxf.message.Message>> i1 = bus.getOutInterceptors();
+		List<Interceptor<? extends org.apache.cxf.message.Message>> i2 = endpoint.getOutInterceptors();
+		List<Interceptor<? extends org.apache.cxf.message.Message>> i3 = getOutInterceptors();
+		List<Interceptor<? extends org.apache.cxf.message.Message>> i4 = endpoint.getBinding().getOutInterceptors();
 
 		PhaseInterceptorChain phaseInterceptorChain = outboundChainCache.get(pm
 				.getOutPhases(), i1, i2, i3, i4);
