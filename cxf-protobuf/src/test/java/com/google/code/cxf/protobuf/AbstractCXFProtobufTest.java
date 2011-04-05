@@ -30,7 +30,7 @@ public abstract class AbstractCXFProtobufTest extends AbstractCXFTest {
 		return buf.toByteArray();
 	}
 
-	protected boolean hasInterceptor(List<Interceptor> interceptors,
+	protected boolean hasInterceptor(List<Interceptor<? extends org.apache.cxf.message.Message>> interceptors,
 			Class<? extends Interceptor> c) {
 		for (Interceptor<?> i : interceptors) {
 			if (i.getClass().equals(c)) {

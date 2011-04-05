@@ -12,6 +12,7 @@ import org.apache.cxf.interceptor.MessageSenderInterceptor;
 import org.apache.cxf.interceptor.OneWayProcessorInterceptor;
 import org.apache.cxf.interceptor.OutgoingChainInterceptor;
 import org.apache.cxf.interceptor.ServiceInvokerInterceptor;
+import org.apache.cxf.message.Message;
 import org.apache.cxf.transport.local.LocalTransportFactory;
 import org.junit.Test;
 
@@ -67,7 +68,7 @@ public class AddressBookRPCServiceImplTest extends AbstractCXFProtobufTest {
 				LocalTransportFactory.TRANSPORT_ID, serviceBean,
 				AddressBookServiceMessage.class);
 
-		List<Interceptor> interceptors = serverFactoryBean.getServer()
+		List<Interceptor<? extends Message>> interceptors = serverFactoryBean.getServer()
 				.getEndpoint().getInInterceptors();
 		System.out.println(interceptors);
 		assertEquals(0, interceptors.size());

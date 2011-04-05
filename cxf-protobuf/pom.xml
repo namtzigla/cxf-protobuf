@@ -4,7 +4,7 @@
 	<groupId>com.google.code.cxf.protobuf</groupId>
 	<artifactId>cxf-protobuf</artifactId>
 	<name>cxf-protobuf</name>
-	<version>0.3</version>
+	<version>0.4</version>
 	<description>Google's Protocol Buffer - Apache CXF Integration</description>
 	<build>
 		<plugins>
@@ -23,22 +23,22 @@
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-core</artifactId>
-			<version>2.2.1</version>
+			<version>2.3.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-transports-local</artifactId>
-			<version>2.2.1</version>
+			<version>2.3.3</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.protobuf</groupId>
 			<artifactId>protobuf-java</artifactId>
-			<version>2.0.3</version>
+			<version>2.4.0a</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.4</version>
+			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
